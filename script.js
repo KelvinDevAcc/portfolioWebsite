@@ -34,14 +34,16 @@ projectCards.forEach(card => {
         modalImage.alt = card.dataset.title;
         modalDescription.textContent = card.dataset.description;
 
-        modal.classList.add("open");
-        document.body.classList.add("modal-open"); // Prevent scrolling
+        modal.style.display = "flex"; // Make sure modal uses flexbox
+        setTimeout(() => modal.classList.add("open"), 10); // Smooth fade-in
+        document.body.classList.add("modal-open"); // Prevent background scrolling
     });
 });
 
 // Close Modal
 closeButton.addEventListener("click", () => {
     modal.classList.remove("open");
+    setTimeout(() => (modal.style.display = "none"), 300); // Smooth fade-out
     document.body.classList.remove("modal-open"); // Restore scrolling
 });
 
@@ -49,6 +51,8 @@ closeButton.addEventListener("click", () => {
 modal.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.classList.remove("open");
+        setTimeout(() => (modal.style.display = "none"), 300);
         document.body.classList.remove("modal-open"); // Restore scrolling
     }
 });
+
