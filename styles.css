@@ -11,6 +11,8 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;
+    overflow-x: hidden;
+    cursor: url('images\ConCurser.png'), auto;
 }	
 /* Sidebar */
 .sidebar {
@@ -48,7 +50,7 @@ body {
 .nav-links a {
     color: white;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 30px;
     font-weight: bold;
     padding: 10px 15px;
     transition: 0.3s;
@@ -150,4 +152,61 @@ body {
     margin: 10px 0;
     font-size: 20px;
 }
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: auto;
+    left:auto;
+    /* transform: translate(-50%, -50%); */
+    background: rgba(20, 20, 20, 0.95);
+    width: 50vw; /* Adjust as needed */
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Ensure modal stays visible */
+.modal.open {
+    display: block;
+    opacity: 1;
+}
+
+/* Prevent background scrolling */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Ensure content is centered */
+.modal-content {
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.modal img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
+}
+
+.close-button:hover {
+    color: red;
+}
+
 
