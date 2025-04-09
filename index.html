@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Dev Portfolio</title>
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <script defer src="script.js"></script>
+    <script src="script.js" defer></script>
 </head>
-<body>
 
+<body>
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="logo">
-            <img src="images\icons\cropped-logo.png" alt="Your Logo">
+            <img src="images/icons/cropped-logo.png" alt="Your Logo">
         </div>
-        
+
         <nav>
             <ul class="nav-links">
                 <li><a href="#projects">Projects</a></li>
@@ -37,118 +38,274 @@
             <a href="mailto:kelvindejongdev@gmail.com"><i class="fas fa-envelope"></i></a>
             <a href="https://github.com/KelvinDevAcc" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.youtube.com/@kelvindejong1784" target="_blank"><i class="fab fa-youtube"></i></a>
-        </div>        
+        </div>
     </aside>
 
     <!-- Main Content -->
     <main class="content">
         <section class="intro">
             <h1>WELCOME!</h1>
-            <p>You've landed on my portfolio. I'm a <strong>Gameplay Programmer</strong> who enjoys deep dives into lower-level programming, creating custom engines, and developing games from scratch.</p>
+            <p>You've landed on my portfolio. I'm a <strong>Gameplay Programmer</strong> who enjoys deep dives into
+                lower-level programming, creating custom engines, and developing games from scratch.</p>
             <hr>
         </section>
 
         <section class="projects" id="projects">
             <h2>PROJECTS</h2>
             <div class="project-grid">
-                <div class="project-card" data-title="TheDastardlyBastard" data-description="A classic arcade game recreated." data-image="images\protfolio\TheDastardlyBastard\1-e1588877654932.png">
-                    <img src="images\protfolio\TheDastardlyBastard\1-e1588877654932.png" alt="TheDastardlyBastard">
+                <!-- Project Cards -->
+                <!-- Project: CastleVania -->
+                <div class="project-card" data-title="CastleVania"
+                    data-description="A party game where players compete in a circular arena."
+                    data-image="images/portfolio/Foolsfight/cover.png"
+                    data-bullets='["Engine: OwnEngine", "Language: C++", "Multiplayer: Yes"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images/portfolio/Foolsfight/cover.png" alt="CastleVania">
+                    <h3>CastleVania</h3>
+                    <p></p>
+                </div>
+
+                <!-- Project: Buger-Time -->
+                <div class="project-card" data-title="Buger-Time"
+                    data-description="A party game where players compete in a circular arena."
+                    data-image="images/portfolio/Foolsfight/cover.png"
+                    data-bullets='["Engine: OwnEngine", "Language: C++", "Multiplayer: Yes"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images/portfolio/Foolsfight/cover.png" alt="Buger-Time">
+                    <h3>Buger-Time</h3>
+                    <p></p>
+                </div>
+
+                <!-- Project: Foolsfight -->
+                <div class="project-card" data-title="Foolsfight"
+                    data-description="A party game where players compete in a circular arena."
+                    data-image="images/portfolio/Foolsfight/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Multiplayer: Yes"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images/portfolio/Foolsfight/cover.png" alt="Foolsfight">
+                    <h3>Foolsfight</h3>
+                    <p></p>
+                </div>
+
+
+                   
+                <!-- Project: To Bee or not to Bee -->
+                <div class="project-card" data-title="To Bee or not to Bee"
+                    data-description="A party game where players compete in a circular arena."
+                    data-image="images/portfolio/Foolsfight/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Multiplayer: Yes"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images/portfolio/Foolsfight/cover.png" alt="To Bee or not to Bee">
+                    <h3>To Bee or not to Bee</h3>
+                    <p></p>
+                </div>
+
+                <!-- Project: VRoomShow -->
+                <div class="project-card" data-title="VRoomShow"
+                    data-description="A colorful, energetic title with a unique style and branding."
+                    data-image="images/portfolio/VRoomShow/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Genre: VR/Party"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images/portfolio/VRoomShow/cover.png" alt="VRoomShow">
+                    <h3>VRoomShow</h3>
+                    <p></p>
+                </div>
+
+                <!-- Project: XoomLab -->
+                <div class="project-card" data-title="XoomLab"
+                    data-description="A party game where players compete in a circular arena."
+                    data-image="images/portfolio/Foolsfight/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Multiplayer: Yes"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images/portfolio/Foolsfight/cover.png" alt="XoomLab">
+                    <h3>XoomLab</h3>
+                    <p></p>
+                </div>
+
+                <!-- Project: XoomLab02 -->
+                <div class="project-card" data-title="XoomLab02"
+                    data-description="A party game where players compete in a circular arena."
+                    data-image="images/portfolio/Foolsfight/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Multiplayer: Yes"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images/portfolio/Foolsfight/cover.png" alt="XoomLab02">
+                    <h3>XoomLab02</h3>
+                    <p></p>
+                </div>
+
+                <!-- Project: MiniMe -->
+                <div class="project-card" data-title="MiniMe"
+                    data-description="A party game where players compete in a circular arena."
+                    data-image="images/portfolio/Foolsfight/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Multiplayer: Yes"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images/portfolio/Foolsfight/cover.png" alt="MiniMe">
+                    <h3>MiniMe</h3>
+                    <p></p>
+                </div>
+
+
+
+                <!-- Project: Project Short Burn -->
+                <div class="project-card" data-title="Project Short Burn"
+                    data-description="A space-themed roguelike where players race to find deals and power-ups before the clock runs out."
+                    data-image="images/portfolio/ShortBurn/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Genre: Shooter"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images\protfolio\ShortBurn\deel-3.png" alt="Project Short Burn">
+                    <h3>Project Short Burn</h3>
+                    <p>15 may 2022</p>
+                </div>
+
+                <!-- Project: Project We Sport -->
+                <div class="project-card" data-title="Project We Sport"
+                    data-description="Out-exercise your opponent in this fast-paced movement game."
+                    data-image="images/portfolio/WeSport/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Genre: Fitness Game"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images\protfolio\WeFit\we-sprot-1.png" alt="Project We Sport">
+                    <h3>Project We Sport</h3>
+                    <p>15 may 2022</p>
+                </div>
+
+                <!-- Project: Project Platformer -->
+                <div class="project-card" data-title="Project Platformer"
+                    data-description="A classic platformer game where you solve puzzles and move through levels to reach the end."
+                    data-image="images/portfolio/Platformer/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Genre: Platformer"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images\protfolio\Spacer\unknown-1.png" alt="Project Platformer">
+                    <h3>Project Platformer</h3>
+                    <p>15 may 2022</p>
+                    <p></p>
+                </div>
+
+                <!-- Project: Water Project -->
+                <div class="project-card" data-title="Water Project"
+                    data-description="Collect planets while using teamwork to keep the people happy."
+                    data-image="images/portfolio/WaterProject/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Co-op Gameplay"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images\protfolio\WaterMuseum\world.png" alt="Water Project">
+                    <h3>Water Project</h3>
+                    <p>15 may 2022</p>
+                </div>
+
+                <!-- Project: The Dastardly Bastard -->
+                <div class="project-card" data-title="The Dastardly Bastard"
+                    data-description="A party game where 3 players collect hats while the 4th tries to shoot them."
+                    data-image="images/portfolio/TheDastardlyBastard/cover.png"
+                    data-video="https://www.youtube.com/watch?v=4HGw4nAJQIY"
+                    data-pdf="documents/TheDastardlyBastard_Report.pdf"
+                    data-bullets='["Engine: Unity", "Language: C#", "Team: Kelvin de Jong, Pim van Wesel"]'
+                    data-extra-images='["images/portfolio/TheDastardlyBastard/3.png", "images/portfolio/TheDastardlyBastard/5.png"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images\protfolio\TheDastardlyBastard\1-e1588877654932.png" alt="The Dastardly Bastard">
                     <h3>The Dastardly Bastard</h3>
-                    <p> 15 May 2022</p>
+                    <p>15 may 2022</p>
                 </div>
-                <div class="project-card" data-title="Julgen Game Engine" data-description="A custom-built game engine." data-image="images/julgen-engine.jpg">
-                    <img src="images\protfolio\Neon\knipsel.png" alt="Julgen Game Engine">
-                    <h3>Neon</h3>
-                    <p> 15 May 2024</p>
+
+                <!-- Project: Project K.I.L.M.E.R. -->
+                <div class="project-card" data-title="Project K.I.L.M.E.R."
+                    data-description="A 1v1 platformer battle game set on a distant planet."
+                    data-image="images/portfolio/KILMER/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "PvP Focus"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images\protfolio\Neon\knipsel.png" alt="Project K.I.L.M.E.R.">
+                    <h3>Project K.I.L.M.E.R.</h3>
+                    <p>15 may 2022</p>
                 </div>
-                <div class="project-card" data-title="What the Hack" data-description="A hacking-themed adventure game." data-image="images/what-the-hack.jpg">
-                    <img src="images\protfolio\ShortBurn\deel-3.png" alt="What the Hack">
-                    <h3>ShortBurn</h3>
-                </div>
-                <div class="project-card" data-title="Breakout" data-description="A physics-based breakout game." data-image="images/breakout.jpg">
-                    <img src="images\protfolio\Spacer\unknown-1.png" alt="Breakout">
-                    <h3>Spacer</h3>
-                </div>
-                <div class="project-card" data-title="Breakout" data-description="A physics-based breakout game." data-image="images/breakout.jpg">
-                    <img src="images\protfolio\TwinstickShooter\aantekening-2020-02-03-235447.png" alt="Breakout">
-                    <h3>TwinstickShooter</h3>
-                </div>
-                <div class="project-card" data-title="Breakout" data-description="A physics-based breakout game." data-image="images/breakout.jpg">
-                    <img src="images\protfolio\WaterMuseum\world.png" alt="Breakout">
-                    <h3>WaterMuseum</h3>
-                </div>
-                <div class="project-card" data-title="Breakout" data-description="A physics-based breakout game." data-image="images/breakout.jpg">
-                    <img src="images\protfolio\WeFit\we-sprot-1.png" alt="Breakout">
-                    <h3>WeFit</h3>
+
+                <!-- Project: Twin Stick Shooter -->
+                <div class="project-card" data-title="Twin Stick Shooter"
+                    data-description="Fight off guards or puzzle your way past them to reach the end goal."
+                    data-image="images/portfolio/TwinStick/cover.png"
+                    data-bullets='["Engine: Unity", "Language: C#", "Genre: Shooter"]'>
+                    <div class="tag-container"></div> <!-- Tag container -->
+                    <img src="images\protfolio\TwinstickShooter\aantekening-2020-02-03-235447-1.png"
+                        alt="Twin Stick Shooter">
+                    <h3>Twin Stick Shooter</h3>
+                    <p>15 may 2022</p>
                 </div>
             </div>
         </section>
+
         <hr class="section-divider">
+
         <section class="about" id="about">
             <h2>ABOUT ME</h2>
             <div class="about-content">
-                <img src="images\icons\pxl_20221231_151634103.portrait2.jpg" alt="Profile Picture" class="profile-pic">
+                <img src="images/icons/pxl_20221231_151634103.portrait2.jpg" alt="Profile Picture" class="profile-pic">
                 <p>
-                    Hey! I'm Kelvin, a **Gameplay Programmer** with a deep passion for building games from the ground up. 
-                    Whether it's crafting custom engines, optimizing performance, or exploring new gameplay mechanics, 
-                    I thrive on pushing technical boundaries to bring ideas to life.
+                    Hey! I'm Kelvin, a <strong>Gameplay Programmer</strong> with a deep passion for building games from
+                    the ground up...
                 </p>
-                <p>
-                    My expertise spans **C++, C#, and Unreal Engine**, but I also enjoy diving into **low-level systems programming** 
-                    to create efficient and scalable game architectures. With experience in both solo and team-based projects, 
-                    I understand the importance of clean, maintainable code and seamless player experiences.
-                </p>
-                <p>
-                    When I'm not coding, you’ll probably find me analyzing game mechanics, learning about new rendering techniques, 
-                    or working on my own personal projects. If you're interested in collaborating, feel free to reach out!
-                </p>
+                <!-- Additional bio text here -->
             </div>
         </section>
-        <hr class="section-divider"> <!-- Separator Line -->
 
-<section class="contact" id="contact">
-    <h2>CONTACT</h2>
-    <div class="contact-content">
-        <!-- Email Section -->
-        <div class="email-section">
-            <a><i class="fas fa-envelope"></i></a>
-            <p class="email-text">kelvindejongdev@gmail.com</p>
-        </div>
-        <p class="contact-message">
-            Feel free to contact me on any platform about any topic!
-        </p>
-        
-        <!-- Social Media Links -->
-        <div class="social-icons">
-            <a href="https://www.linkedin.com/in/kelvin-de-jong" target="_blank">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="mailto:kelvindejongdev@gmail.com">
-                <i class="fas fa-envelope"></i>
-            </a>
-            <a href="https://github.com/KelvinDevAcc" target="_blank">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.youtube.com/@kelvindejong1784" target="_blank">
-                <i class="fab fa-youtube"></i>
-            </a>
-        </div>  
-    </div>
-</section>
+        <hr class="section-divider">
 
+        <section class="contact" id="contact">
+            <h2>CONTACT</h2>
+            <div class="contact-content">
+                <div class="email-section">
+                    <i class="fas fa-envelope"></i>
+                    <p class="email-text">kelvindejongdev@gmail.com</p>
+                </div>
+                <p class="contact-message">Feel free to contact me on any platform about any topic!</p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/kelvin-de-jong" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="mailto:kelvindejongdev@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <a href="https://github.com/KelvinDevAcc" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.youtube.com/@kelvindejong1784" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Modal Structure -->
     <div id="project-modal" class="modal">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2 id="modal-title"></h2>
-            <img id="modal-image" src="" alt="">
-            <p id="modal-description"></p>
-        </div>
-    </div>
+            <span class="close-button" aria-label="Close Modal">&times;</span>
 
-    
-    
+            <!-- Header: Title and possibly a short tagline -->
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+            </div>
+
+            <!-- Body: Split into two sections (side-by-side on desktop; stacked on mobile) -->
+            <div class="modal-body">
+
+                <!-- Media Section: Can contain images/video/iframe -->
+                <div class="modal-media">
+                    <!-- Primary image/video container. This element toggles depending on content. -->
+                    <img id="modal-image" src="" alt="" style="display:none;">
+                    <video id="modal-video" controls style="display:none;"></video>
+                    <iframe id="modal-iframe" style="display:none;" frameborder="0" allowfullscreen></iframe>
+
+                    <!-- A container for extra images if available (like a gallery) -->
+                    <div id="modal-gallery" class="modal-gallery">
+                        <!-- Extra images will be inserted here dynamically -->
+                    </div>
+                </div>
+
+                <!-- Text Section: Contains description, bullet points, and a PDF link -->
+                <div class="modal-text">
+                    <p id="modal-description"></p>
+                    <ul id="modal-bullets">
+                        <!-- Bullet points injected dynamically -->
+                    </ul>
+                    <a id="modal-pdf-link" target="_blank" style="display:none;">📄 View Full Breakdown (PDF)</a>
+                </div>
+
+            </div><!-- End modal-body -->
+        </div><!-- End modal-content -->
+    </div><!-- End modal -->
+
+
 </body>
+
 </html>
