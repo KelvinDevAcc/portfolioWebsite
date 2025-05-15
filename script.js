@@ -13,15 +13,19 @@ function getYouTubeEmbedURL(url) {
 
 // Modal Elements (declared globally for reuse)
 const modal = document.getElementById("project-modal");
+const overlay = document.querySelector(".overlay");
+const closeButtons = document.querySelectorAll(".close-btn, .close-project-btn");
+
+
 const modalTitle = document.getElementById("modal-title");
+const modalDescriptionAbout = document.getElementById("modal-description-about");
+const modalDescriptionDid = document.getElementById("modal-description-did");
 const modalImage = document.getElementById("modal-image");
-const modalVideo = document.getElementById("modal-video");
+const modalIframeWrapper = document.getElementById("modal-iframe-wrapper");
 const modalIframe = document.getElementById("modal-iframe");
-const modalDescription = document.getElementById("modal-description");
-const modalBullets = document.getElementById("modal-bullets");
 const modalExtraImages = document.getElementById("modal-extra-images");
-const modalPdfLink = document.getElementById("modal-pdf-link");
-const closeButton = document.querySelector(".close-button");
+const modalFooter = document.getElementById("modal-footer");
+const modalButtons = document.getElementById("modal-buttons");
 
 document.addEventListener("DOMContentLoaded", () => {
     // === Smooth Scroll for Sidebar Links ===
@@ -85,93 +89,170 @@ document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".project-card");
 
     function clearModal() {
-        modalImage.style.display = "none";
-        modalVideo.style.display = "none";
-        modalIframe.style.display = "none";
-        modalPdfLink.style.display = "none";
-        modalBullets.innerHTML = "";
-        modalExtraImages.innerHTML = "";
-        modalImage.src = "";
-        modalVideo.src = "";
-        modalIframe.src = "";
+        if (modalImage) {
+            modalImage.style.display = "none";
+            modalImage.src = "";
+        }
+        if (modalIframe) {
+            modalIframeWrapper.style.display = "none";
+            modalIframe.src = "";
+        }
+
+        modalFooter.innerHTML = "";
+        modalButtons.innerHTML = "";
+        if (modalExtraImages) {
+            modalExtraImages.innerHTML = "";
+        }
     }
+
 
     cards.forEach(card => {
         card.addEventListener("click", () => {
             clearModal();
 
+            // Update modal content
             modalTitle.textContent = card.dataset.title || "";
-            modalDescription.textContent = card.dataset.description || "";
 
+            const modalDescriptionAbout = document.getElementById("modal-description-about");
+            const modalDescriptionDid = document.getElementById("modal-description-did");
+
+            modalDescriptionAbout.textContent = card.dataset.descriptionAbout || "";
+            modalDescriptionDid.textContent = card.dataset.descriptionDid || "";
+
+            // Handle image
             if (card.dataset.image) {
                 modalImage.src = card.dataset.image;
                 modalImage.style.display = "block";
             }
 
+            // Handle video (YouTube or file)
             if (card.dataset.video) {
                 const videoURL = card.dataset.video;
                 if (videoURL.includes("youtube.com") || videoURL.includes("youtu.be")) {
                     modalIframe.src = getYouTubeEmbedURL(videoURL);
-                    modalIframe.style.display = "block";
-                } else {
-                    modalVideo.src = videoURL;
-                    modalVideo.style.display = "block";
-                }
-            }
-            
-            if (card.dataset.iframe) {
-                modalIframe.src = getYouTubeEmbedURL(card.dataset.iframe) || card.dataset.iframe;
-                modalIframe.style.display = "block";
-            }
-
-            if (card.dataset.bullets) {
-                try {
-                    const bullets = JSON.parse(card.dataset.bullets);
-                    bullets.forEach(bullet => {
-                        const li = document.createElement("li");
-                        li.textContent = bullet;
-                        modalBullets.appendChild(li);
-                    });
-                } catch (e) {
-                    console.error("Bullet JSON error", e);
+                    modalIframeWrapper.style.display = "block";
                 }
             }
 
+            // Handle PDF link
             if (card.dataset.pdf) {
                 modalPdfLink.href = card.dataset.pdf;
                 modalPdfLink.style.display = "inline-block";
             }
 
-            if (card.dataset.extraImages) {
+            // Fill modal footer with bullets
+            if (card.dataset.bullets) {
                 try {
-                    const images = JSON.parse(card.dataset.extraImages);
-                    images.forEach(src => {
-                        const img = document.createElement("img");
-                        img.src = src;
-                        img.classList.add("gallery-image");
-                        modalExtraImages.appendChild(img);
+                    const bullets = JSON.parse(card.dataset.bullets);
+                    const headers = [];
+                    const values = [];
+
+                    bullets.forEach(bullet => {
+                        const parts = bullet.split(": ");
+                        if (parts.length === 2) {
+                            headers.push(parts[0]);
+                            values.push(parts[1]);
+                        }
                     });
+
+                    // Clear footer first
+                    modalFooter.innerHTML = "";
+
+                    // Create a table element
+                    const table = document.createElement("table");
+                    table.classList.add("modal-footer-table");  // add a class for styling
+
+                    // Create header row
+                    const thead = document.createElement("thead");
+                    const headerRow = document.createElement("tr");
+                    headers.forEach(headerText => {
+                        const th = document.createElement("th");
+                        th.textContent = headerText;
+                        headerRow.appendChild(th);
+                    });
+                    thead.appendChild(headerRow);
+                    table.appendChild(thead);
+
+                    // Create values row
+                    const tbody = document.createElement("tbody");
+                    const valueRow = document.createElement("tr");
+                    values.forEach(valueText => {
+                        const td = document.createElement("td");
+                        td.textContent = valueText;
+                        valueRow.appendChild(td);
+                    });
+                    tbody.appendChild(valueRow);
+                    table.appendChild(tbody);
+
+                    // Append table to modal footer
+                    modalFooter.appendChild(table);
                 } catch (e) {
-                    console.error("Extra Images JSON error", e);
+                    console.error("Bullet JSON error", e);
                 }
             }
 
+            function createButton(text, url) {
+                const btn = document.createElement("button");
+                btn.textContent = text;
+                btn.classList.add("btn"); // use your btn class styling
+                btn.onclick = () => window.open(url, "_blank"); // open link in new tab
+                let iconClass = "";
+                if (text.toLowerCase().includes("itch")) {
+                    iconClass = "fab fa-itch-io";
+                } else if (text.toLowerCase().includes("github")) {
+                    iconClass = "fab fa-github";
+                }
+
+                // Insert icon + text
+                btn.innerHTML = iconClass
+                    ? `<i class="${iconClass}" style="margin-right: 0.5rem;"></i>${text}`
+                    : text;
+
+                return btn;
+            }
+
+            // Example: check if your card has itch or github links in data attributes
+            if (card.dataset.itchio) {
+                modalButtons.appendChild(createButton("View on Itch.io", card.dataset.itchio));
+            }
+            if (card.dataset.github) {
+                modalButtons.appendChild(createButton("View on GitHub", card.dataset.github));
+            }
+            if (card.dataset.webPage) {
+                modalButtons.appendChild(createButton("View on WebPage", card.dataset.webPage));
+            }
+
+
+
+
+
+            // Show modal + overlay
             modal.classList.add("open");
+            document.querySelector(".overlay").classList.add("open");
+            document.body.style.overflow = "hidden";
         });
     });
 
+
     // Close Modal
-    closeButton.addEventListener("click", () => {
-        modal.classList.remove("open");
-        clearModal();
-      });
-      
-      window.addEventListener("click", (e) => {
+    closeButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            modal.classList.remove("open");
+            overlay.classList.remove("open");
+            document.body.style.overflow = "";
+            clearModal();
+        });
+    });
+
+
+    window.addEventListener("click", (e) => {
         if (e.target === modal) {
-          modal.classList.remove("open");
-          clearModal();
+            modal.classList.remove("open");
+            overlay.classList.remove("open");
+            document.body.style.overflow = "";
+            clearModal();
         }
-      });
+    });
 });
 
 
