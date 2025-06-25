@@ -607,3 +607,84 @@ body {
     opacity: 0.6;
     font-style: italic;
 }
+
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .nav-links li {
+        margin: 10px;
+    }
+
+    .social-icons {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .intro h1 {
+        font-size: 2rem;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-images img {
+        width: 80%;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links a {
+        font-size: 1.25rem;
+        padding: 8px;
+    }
+
+    .intro h1 {
+        font-size: 1.5rem;
+    }
+
+    .project-card h3 {
+        font-size: 1rem;
+    }
+
+    .tag {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+
+    .email-text,
+    .contact-message {
+        font-size: 0.85rem;
+    }
+
+    .box h2 {
+        font-size: 1.1rem;
+    }
+}
