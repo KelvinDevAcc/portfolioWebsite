@@ -23,9 +23,10 @@ const modalDescriptionDid = document.getElementById("modal-description-did");
 const modalImage = document.getElementById("modal-image");
 const modalIframeWrapper = document.getElementById("modal-iframe-wrapper");
 const modalIframe = document.getElementById("modal-iframe");
-const modalExtraImages = document.getElementById("modal-extra-images");
+//const modalExtraImages = document.getElementById("modal-extra-images");
 const modalFooter = document.getElementById("modal-footer");
 const modalButtons = document.getElementById("modal-buttons");
+const modalExtraImages = document.getElementById("modal-images");
 
 document.addEventListener("DOMContentLoaded", () => {
     // === Smooth Scroll for Sidebar Links ===
@@ -89,25 +90,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll(".project-card");
 
     function clearModal() {
-        if (modalImage) {
-            modalImage.style.display = "none";
-            modalImage.src = "";
-        }
-        if (modalIframe) {
-            modalIframeWrapper.style.display = "none";
-            modalIframe.src = "";
-        }
+        modalImage.style.display = "none";
+        modalImage.src = "";
+        modalIframeWrapper.style.display = "none";
+        modalIframe.src = "";
+        modalFooter.replaceChildren();
+        modalButtons.replaceChildren();
+        modalExtraImages.replaceChildren();
 
-        modalFooter.innerHTML = "";
-        modalButtons.innerHTML = "";
-        if (modalExtraImages) {
-            modalExtraImages.innerHTML = "";
-        }
+        const modalContent = modal.querySelector(".modal-content");
+        if (modalContent) modalContent.scrollTop = 0; // reset scroll
+    }
+
+    function closeModal() {
+        modal.classList.remove("open");
+        overlay.classList.remove("open");
+        document.body.style.overflow = "";
+        clearModal();
+        if (lastFocused) lastFocused.focus();
     }
 
 
     cards.forEach(card => {
         card.addEventListener("click", () => {
+            lastFocused = document.activeElement;
             clearModal();
 
             // Update modal content
@@ -235,24 +241,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // Close Modal
-    closeButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            modal.classList.remove("open");
-            overlay.classList.remove("open");
-            document.body.style.overflow = "";
-            clearModal();
-        });
-    });
-
-
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.classList.remove("open");
-            overlay.classList.remove("open");
-            document.body.style.overflow = "";
-            clearModal();
-        }
-    });
+   closeButtons.forEach(btn => btn.addEventListener("click", closeModal));
+    overlay.addEventListener("click", closeModal);
 });
 
 
