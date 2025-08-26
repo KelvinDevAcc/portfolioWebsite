@@ -11,34 +11,29 @@ function getYouTubeEmbedURL(url) {
     }
 }
 
-// Modal Elements (declared globally for reuse)
+// Modal Elements
 const modal = document.getElementById("project-modal");
 const overlay = document.querySelector(".overlay");
 const closeButtons = document.querySelectorAll(".close-btn, .close-project-btn");
-
-
 const modalTitle = document.getElementById("modal-title");
 const modalDescriptionAbout = document.getElementById("modal-description-about");
 const modalDescriptionDid = document.getElementById("modal-description-did");
 const modalImage = document.getElementById("modal-image");
 const modalIframeWrapper = document.getElementById("modal-iframe-wrapper");
 const modalIframe = document.getElementById("modal-iframe");
-//const modalExtraImages = document.getElementById("modal-extra-images");
 const modalFooter = document.getElementById("modal-footer");
 const modalButtons = document.getElementById("modal-buttons");
-const modalExtraImages = document.getElementById("modal-images");
+const modalExtraImages = document.getElementById("modal-image");
+
+let lastFocused = null; // track last focused element
 
 document.addEventListener("DOMContentLoaded", () => {
-    // === Smooth Scroll for Sidebar Links ===
-    document.querySelectorAll('.sidebar nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.querySelector('.content').scrollIntoView({ behavior: 'smooth' });
-        });
-    });
+
+    const cards = document.querySelectorAll(".project-card");
 
     // === Tilt Effect ===
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
+    cards.forEach(card => {
+        card.addEventListener("mousemove", e => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -46,38 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const centerY = rect.height / 2;
             const rotateX = ((y - centerY) / centerY) * 12;
             const rotateY = ((x - centerX) / centerX) * -12;
-
-            card.style.transform = `
-                perspective(1000px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                scale(1.03)
-            `;
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
         });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `
-                perspective(1000px)
-                rotateX(0deg)
-                rotateY(0deg)
-                scale(1)
-            `;
+        card.addEventListener("mouseleave", () => {
+            card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
         });
     });
 
     // === Tag Injection ===
-    document.querySelectorAll('.project-card').forEach(card => {
+    cards.forEach(card => {
         const bullets = JSON.parse(card.dataset.bullets || "[]");
-        const tagContainer = card.querySelector('.tag-container');
-
+        const tagContainer = card.querySelector(".tag-container");
         if (tagContainer) {
             bullets.forEach(bullet => {
                 const parts = bullet.split(': ');
                 const type = parts[0]?.toLowerCase();
                 const value = parts[1]?.trim();
-
                 if (!type || !value) return;
-
                 const tag = document.createElement('span');
                 tag.textContent = value;
                 tag.classList.add('tag', type, value.toLowerCase().replace(/[^a-z0-9]/g, ''));
@@ -86,9 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // === Modal Logic ===
-    const cards = document.querySelectorAll(".project-card");
-
+    // === Modal Functions ===
     function clearModal() {
         modalImage.style.display = "none";
         modalImage.src = "";
@@ -97,9 +75,8 @@ document.addEventListener("DOMContentLoaded", () => {
         modalFooter.replaceChildren();
         modalButtons.replaceChildren();
         modalExtraImages.replaceChildren();
-
         const modalContent = modal.querySelector(".modal-content");
-        if (modalContent) modalContent.scrollTop = 0; // reset scroll
+        if (modalContent) modalContent.scrollTop = 0;
     }
 
     function closeModal() {
@@ -110,139 +87,107 @@ document.addEventListener("DOMContentLoaded", () => {
         if (lastFocused) lastFocused.focus();
     }
 
-
+    // Open modal
     cards.forEach(card => {
         card.addEventListener("click", () => {
             lastFocused = document.activeElement;
             clearModal();
 
-            // Update modal content
             modalTitle.textContent = card.dataset.title || "";
-
-            const modalDescriptionAbout = document.getElementById("modal-description-about");
-            const modalDescriptionDid = document.getElementById("modal-description-did");
-
             modalDescriptionAbout.textContent = card.dataset.descriptionAbout || "";
             modalDescriptionDid.textContent = card.dataset.descriptionDid || "";
 
-            // Handle image
             if (card.dataset.image) {
                 modalImage.src = card.dataset.image;
                 modalImage.style.display = "block";
             }
 
-            // Handle video (YouTube or file)
             if (card.dataset.video) {
-                const videoURL = card.dataset.video;
-                if (videoURL.includes("youtube.com") || videoURL.includes("youtu.be")) {
-                    modalIframe.src = getYouTubeEmbedURL(videoURL);
+                const url = card.dataset.video;
+                if (url.includes("youtube.com") || url.includes("youtu.be")) {
+                    modalIframe.src = getYouTubeEmbedURL(url);
                     modalIframeWrapper.style.display = "block";
                 }
             }
 
-            // Handle PDF link
-            if (card.dataset.pdf) {
+            if (card.dataset.pdf && modalPdfLink) {
                 modalPdfLink.href = card.dataset.pdf;
                 modalPdfLink.style.display = "inline-block";
             }
 
-            // Fill modal footer with bullets
+            // Bullets table
             if (card.dataset.bullets) {
                 try {
                     const bullets = JSON.parse(card.dataset.bullets);
                     const headers = [];
                     const values = [];
-
-                    bullets.forEach(bullet => {
-                        const parts = bullet.split(": ");
+                    bullets.forEach(b => {
+                        const parts = b.split(": ");
                         if (parts.length === 2) {
                             headers.push(parts[0]);
                             values.push(parts[1]);
                         }
                     });
+                    if (headers.length) {
+                        const table = document.createElement("table");
+                        table.classList.add("modal-footer-table");
+                        const thead = document.createElement("thead");
+                        const headerRow = document.createElement("tr");
+                        headers.forEach(h => {
+                            const th = document.createElement("th");
+                            th.textContent = h;
+                            headerRow.appendChild(th);
+                        });
+                        thead.appendChild(headerRow);
+                        table.appendChild(thead);
 
-                    // Clear footer first
-                    modalFooter.innerHTML = "";
+                        const tbody = document.createElement("tbody");
+                        const valueRow = document.createElement("tr");
+                        values.forEach(v => {
+                            const td = document.createElement("td");
+                            td.textContent = v;
+                            valueRow.appendChild(td);
+                        });
+                        tbody.appendChild(valueRow);
+                        table.appendChild(tbody);
 
-                    // Create a table element
-                    const table = document.createElement("table");
-                    table.classList.add("modal-footer-table");  // add a class for styling
-
-                    // Create header row
-                    const thead = document.createElement("thead");
-                    const headerRow = document.createElement("tr");
-                    headers.forEach(headerText => {
-                        const th = document.createElement("th");
-                        th.textContent = headerText;
-                        headerRow.appendChild(th);
-                    });
-                    thead.appendChild(headerRow);
-                    table.appendChild(thead);
-
-                    // Create values row
-                    const tbody = document.createElement("tbody");
-                    const valueRow = document.createElement("tr");
-                    values.forEach(valueText => {
-                        const td = document.createElement("td");
-                        td.textContent = valueText;
-                        valueRow.appendChild(td);
-                    });
-                    tbody.appendChild(valueRow);
-                    table.appendChild(tbody);
-
-                    // Append table to modal footer
-                    modalFooter.appendChild(table);
-                } catch (e) {
-                    console.error("Bullet JSON error", e);
-                }
+                        modalFooter.appendChild(table);
+                    }
+                } catch (e) { console.error("Bullet JSON error", e); }
             }
 
+            // Buttons
             function createButton(text, url) {
                 const btn = document.createElement("button");
-                btn.textContent = text;
-                btn.classList.add("btn"); // use your btn class styling
-                btn.onclick = () => window.open(url, "_blank"); // open link in new tab
-                let iconClass = "";
-                if (text.toLowerCase().includes("itch")) {
-                    iconClass = "fab fa-itch-io";
-                } else if (text.toLowerCase().includes("github")) {
-                    iconClass = "fab fa-github";
-                }
-
-                // Insert icon + text
-                btn.innerHTML = iconClass
-                    ? `<i class="${iconClass}" style="margin-right: 0.5rem;"></i>${text}`
-                    : text;
-
+                btn.classList.add("btn");
+                btn.innerHTML = text;
+                btn.onclick = () => window.open(url, "_blank");
                 return btn;
             }
 
-            // Example: check if your card has itch or github links in data attributes
-            if (card.dataset.itchio) {
-                modalButtons.appendChild(createButton("View on Itch.io", card.dataset.itchio));
-            }
-            if (card.dataset.github) {
-                modalButtons.appendChild(createButton("View on GitHub", card.dataset.github));
-            }
-            if (card.dataset.webPage) {
-                modalButtons.appendChild(createButton("View on WebPage", card.dataset.webPage));
-            }
+            if (card.dataset.itchio) modalButtons.appendChild(createButton("View on Itch.io", card.dataset.itchio));
+            if (card.dataset.github) modalButtons.appendChild(createButton("View on GitHub", card.dataset.github));
+            if (card.dataset.webPage) modalButtons.appendChild(createButton("View on WebPage", card.dataset.webPage));
 
-
-
-
-
-            // Show modal + overlay
+            // Show modal
             modal.classList.add("open");
-            document.querySelector(".overlay").classList.add("open");
+            overlay.classList.add("open");
             document.body.style.overflow = "hidden";
+
+            const modalContent = modal.querySelector(".modal-content");
+            if (modalContent) {
+                modalContent.scrollTop = 0;
+            }
         });
     });
 
-
-    // Close Modal
-   closeButtons.forEach(btn => btn.addEventListener("click", closeModal));
+    // Close modal
+    closeButtons.forEach(btn => btn.addEventListener("click", closeModal));
     overlay.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    modal.querySelector(".modal-content").addEventListener("click", e => e.stopPropagation());
 });
-
-
