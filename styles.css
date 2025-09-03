@@ -29,10 +29,13 @@ body {
 }
 
 .logo img {
-    max-width: 120px;
-    height: auto;
-    margin-bottom: 20px;
-    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;      /* makes it round */
+    object-fit: cover;       /* keeps it from stretching */
+    
+    border: 4px solid #4c4545;  /* ✅ white circular border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* optional: soft shadow */
 }
 
 .nav-links {
@@ -177,7 +180,7 @@ body {
     width: 100%;
     height: 100%;
     min-height: 300px;
-    min-width: 300;
+    min-width: 300px;
     margin: 0 auto;
     perspective: 1000px;
     transform-style: preserve-3d;
@@ -194,7 +197,7 @@ body {
 }
 
 .project-card.wide img {
-    height: 350px; 
+    height: 350px;
 }
 
 .tag-container {
@@ -347,30 +350,36 @@ body {
 /* Modal (Overlay) */
 .modal {
     display: none;
-    position: fixed; /* keep centered */
+    position: fixed;
+    /* keep centered */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     backdrop-filter: blur(10px);
     justify-content: center;
-    align-items: flex-start; /* modal starts at top */
+    align-items: flex-start;
+    /* modal starts at top */
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    overflow-y: auto; /* ✅ allow scroll when content is tall */
-    padding: 2rem 0;  /* some breathing space top/bottom */
+    overflow-y: auto;
+    /* ✅ allow scroll when content is tall */
+    padding: 2rem 0;
+    /* some breathing space top/bottom */
 }
 
 .modal,
 .overlay {
-     display: none;
-    position: fixed; /* cover entire viewport */
+    display: none;
+    position: fixed;
+    /* cover entire viewport */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(59, 59, 59, 0.347); /* dark backdrop */
+    background: rgba(59, 59, 59, 0.347);
+    /* dark backdrop */
     z-index: 999;
 }
 
@@ -399,8 +408,8 @@ body {
 }
 
 .modal::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 3px;
+    background: transparent;
+    border-radius: 3px;
 }
 
 .modal:hover::-webkit-scrollbar-thumb {
@@ -457,13 +466,14 @@ body {
 }
 
 .modal-content {
-      max-width: 850px;
+    max-width: 850px;
     background: rgb(172, 108, 108);
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    margin: auto; /* keep it centered horizontally */
+    margin: auto;
+    /* keep it centered horizontally */
 }
 
 .modal-footer-table {
@@ -714,6 +724,19 @@ body {
         margin-left: 0;
         width: 100%;
         padding: 20px;
+    }
+
+    .project-card.wide,
+    .project-card.top,
+    .project-card.archived {
+        grid-column: span 1;
+        grid-row: span 1;
+        height: auto;
+    }
+
+    .project-card.wide img {
+        height: auto;
+        /* match normal project-card */
     }
 
     .intro h1 {
