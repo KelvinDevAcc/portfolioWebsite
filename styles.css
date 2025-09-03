@@ -13,6 +13,7 @@ body {
     background-size: cover;
     overflow-x: hidden;
     cursor: url('images/ConCurser.png'), auto;
+    min-width: 320px;
 }
 
 /* === Sidebar === */
@@ -172,7 +173,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 25px;
-    justify-content: center;
+    justify-content: stretch;
 }
 
 .project-card {
@@ -190,6 +191,7 @@ body {
     transform-style: preserve-3d;
     transition: transform 0.2s ease;
     will-change: transform;
+    justify-content: space-between;
     position: relative;
 }
 
@@ -556,6 +558,14 @@ body {
     object-fit: cover;
     margin-bottom: 20px;
     border: 4px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+/* On click, add a class to scale it */
+.profile-pic.active {
+    transform: scale(5.5);
+    /* increase size 1.5x */
 }
 
 .about p {
@@ -751,6 +761,12 @@ body {
         /* same as normal */
         object-fit: cover;
     }
+
+    .profile-pic.active {
+        transform: scale(2.5);
+        /* increase size 1.5x */
+    }
+
 
     .intro h1 {
         font-size: 2rem;

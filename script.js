@@ -181,6 +181,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    const profilePic = document.querySelector('.profile-pic');
+
+    profilePic.addEventListener('click', () => {
+        profilePic.classList.toggle('active');
+    });
+
     // Close modal
     closeButtons.forEach(btn => btn.addEventListener("click", closeModal));
     overlay.addEventListener("click", closeModal);
