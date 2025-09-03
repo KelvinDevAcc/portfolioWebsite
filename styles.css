@@ -31,11 +31,15 @@ body {
 .logo img {
     width: 120px;
     height: 120px;
-    border-radius: 50%;      /* makes it round */
-    object-fit: cover;       /* keeps it from stretching */
-    
-    border: 4px solid #4c4545;  /* ✅ white circular border */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* optional: soft shadow */
+    border-radius: 50%;
+    /* makes it round */
+    object-fit: cover;
+    /* keeps it from stretching */
+
+    border: 4px solid #4c4545;
+    /* ✅ white circular border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* optional: soft shadow */
 }
 
 .nav-links {
@@ -726,17 +730,26 @@ body {
         padding: 20px;
     }
 
-    .project-card.wide,
-    .project-card.top,
-    .project-card.archived {
-        grid-column: span 1;
-        grid-row: span 1;
-        height: auto;
+    .container-wrapper {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 0px;
     }
 
-    .project-card.wide img {
-        height: auto;
-        /* match normal project-card */
+    .project-card.top,
+    .project-card.archived {
+        grid-column: span 1 !important;
+        grid-row: span 1 !important;
+        height: auto !important;
+    }
+
+    /* Reset images so they match normal cards */
+    .project-card.wide img,
+    .project-card.top img,
+    .project-card.archived img {
+        height: 200px !important;
+        /* same as normal */
+        object-fit: cover;
     }
 
     .intro h1 {
