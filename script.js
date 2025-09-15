@@ -18,12 +18,15 @@ const closeButtons = document.querySelectorAll(".close-btn, .close-project-btn")
 const modalTitle = document.getElementById("modal-title");
 const modalDescriptionAbout = document.getElementById("modal-description-about");
 const modalDescriptionDid = document.getElementById("modal-description-did");
-const modalImage = document.getElementById("modal-image");
 const modalIframeWrapper = document.getElementById("modal-iframe-wrapper");
 const modalIframe = document.getElementById("modal-iframe");
 const modalFooter = document.getElementById("modal-footer");
 const modalButtons = document.getElementById("modal-buttons");
-const modalExtraImages = document.getElementById("modal-image");
+const modalExtraImages = document.getElementById("modal-images");
+const modalMainImage = document.getElementById("modal-main-image");
+const modalThumbnails = document.getElementById("modal-thumbnails");
+
+
 
 let lastFocused = null; // track last focused element
 
@@ -68,8 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // === Modal Functions ===
     function clearModal() {
-        modalImage.style.display = "none";
-        modalImage.src = "";
         modalIframeWrapper.style.display = "none";
         modalIframe.src = "";
         modalFooter.replaceChildren();
@@ -97,9 +98,50 @@ document.addEventListener("DOMContentLoaded", () => {
             modalDescriptionAbout.textContent = card.dataset.descriptionAbout || "";
             modalDescriptionDid.textContent = card.dataset.descriptionDid || "";
 
-            if (card.dataset.image) {
-                modalImage.src = card.dataset.image;
-                modalImage.style.display = "block";
+            if (card.dataset.images) {
+                try {
+                    const images = JSON.parse(card.dataset.images);
+                    let currentIndex = 0;
+
+                    if (images.length > 0) {
+                        // set first image as main
+                        modalMainImage.src = images[0];
+
+                        // build thumbnails
+                        modalThumbnails.replaceChildren();
+                        images.forEach((src, index) => {
+                            const thumb = document.createElement("img");
+                            thumb.src = src;
+                            thumb.alt = card.dataset.title || "Thumbnail";
+                            if (index === 0) thumb.classList.add("active");
+                            thumb.addEventListener("click", () => {
+                                currentIndex = index;
+                                updateImage();
+                            });
+                            modalThumbnails.appendChild(thumb);
+                        });
+
+                        // update function
+                        function updateImage() {
+                            modalMainImage.src = images[currentIndex];
+                            modalThumbnails.querySelectorAll("img").forEach((t, i) => {
+                                t.classList.toggle("active", i === currentIndex);
+                            });
+                        }
+
+                        // navigation buttons
+                        document.getElementById("prev-image").onclick = () => {
+                            currentIndex = (currentIndex - 1 + images.length) % images.length;
+                            updateImage();
+                        };
+                        document.getElementById("next-image").onclick = () => {
+                            currentIndex = (currentIndex + 1) % images.length;
+                            updateImage();
+                        };
+                    }
+                } catch (e) {
+                    console.error("Image JSON error", e);
+                }
             }
 
             if (card.dataset.video) {

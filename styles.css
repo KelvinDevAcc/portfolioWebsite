@@ -107,7 +107,8 @@ body {
 .intro p {
     text-align: center;
     font-size: 1.125rem;
-    line-height: 1.6; /* to match readability */
+    line-height: 1.6;
+    /* to match readability */
     max-width: 80%;
     margin: 0 auto;
 }
@@ -122,10 +123,16 @@ body {
 /* === Projects === */
 
 .container-wrapper {
-    max-width: 2500px;
+    max-width: 80%;
     margin: 0 auto;
-    padding: 0 300px;
+    padding: 0 17%;
 }
+
+.container-wrapper.archived {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
 
 .project-card.wide {
     grid-column: span 2;
@@ -172,6 +179,15 @@ body {
 }
 
 .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* exactly 2 columns */
+    gap: 25px;
+    justify-content: center;
+    /* center the grid items */
+}
+
+.project-grid.archived-projects {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 25px;
@@ -221,6 +237,45 @@ body {
     pointer-events: none;
     z-index: 2;
 }
+
+/* === Projectimages === */
+.modal-images-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-Top: 2rem;
+}
+#modal-main-image {
+  max-width: 80%;
+  max-height: 400px;
+  border-radius: 8px;
+}
+.nav-btn {
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.modal-thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.modal-thumbnails img {
+  width: 60px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.modal-thumbnails img.active {
+  border-color: #007bff;
+}
+
+
 
 .project-card:hover .tag-container {
     opacity: 1;
@@ -587,24 +642,29 @@ body {
 }
 
 .cv-button {
-  display: inline-flex;      /* makes the button a flex container */
-  align-items: center;       /* vertical centering */
-  text-decoration: none;
-  padding: 15px 32px;
-  background-color: #555555;
-  color: white;
-  border-radius: 12px;
-  font-size: 20px;
-  gap: 10px;                 /* spacing between icon and text */
+    display: inline-flex;
+    /* makes the button a flex container */
+    align-items: center;
+    /* vertical centering */
+    text-decoration: none;
+    padding: 15px 32px;
+    background-color: #555555;
+    color: white;
+    border-radius: 12px;
+    font-size: 20px;
+    gap: 10px;
+    /* spacing between icon and text */
 }
 
 .cv-button .cv-icon {
-  font-size: 1.2em;          /* slightly larger or smaller to match text */
-  line-height: 1;            /* ensure proper vertical alignment */
+    font-size: 1.2em;
+    /* slightly larger or smaller to match text */
+    line-height: 1;
+    /* ensure proper vertical alignment */
 }
 
 .cv-button:hover {
-  background-color: #a4a9ae;
+    background-color: #a4a9ae;
 }
 
 
@@ -798,6 +858,15 @@ body {
     .intro h1 {
         font-size: 2rem;
     }
+
+
+    .container-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 5%;
+        /* responsive padding */
+    }
+
 
     .project-grid {
         grid-template-columns: 1fr;
