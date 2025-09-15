@@ -75,7 +75,30 @@ document.addEventListener("DOMContentLoaded", () => {
         modalIframe.src = "";
         modalFooter.replaceChildren();
         modalButtons.replaceChildren();
-        modalExtraImages.replaceChildren();
+        // Hide and reset the main image
+        modalMainImage.src = "";
+        modalMainImage.style.display = "none";
+
+        // Clear thumbnails
+        modalThumbnails.replaceChildren();
+        modalThumbnails.style.display = "flex";
+
+        // Hide navigation buttons
+        document.getElementById("prev-image").style.display = "none";
+        document.getElementById("next-image").style.display = "none";
+
+        // Reset other modal elements
+        modalIframeWrapper.style.display = "none";
+        modalIframe.src = "";
+        modalFooter.replaceChildren();
+        modalButtons.replaceChildren();
+
+
+        // Reset other modal elements
+        modalIframeWrapper.style.display = "none";
+        modalIframe.src = "";
+        modalFooter.replaceChildren();
+        modalButtons.replaceChildren();
         const modalContent = modal.querySelector(".modal-content");
         if (modalContent) modalContent.scrollTop = 0;
     }
@@ -105,7 +128,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     if (images.length > 0) {
                         // set first image as main
-                        modalMainImage.src = images[0];
+                        modalMainImage.src = images[0]; // first image
+                        modalMainImage.style.display = "block";
+
+                        // Show buttons only if multiple images
+                        const prevBtn = document.getElementById("prev-image");
+                        const nextBtn = document.getElementById("next-image");
+                        if (images.length > 1) {
+                            prevBtn.style.display = "block";
+                            nextBtn.style.display = "block";
+                        } else {
+                            prevBtn.style.display = "none";
+                            nextBtn.style.display = "none";
+                        }
 
                         // build thumbnails
                         modalThumbnails.replaceChildren();
