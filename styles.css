@@ -105,9 +105,11 @@ body {
 }
 
 .intro p {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    text-align: center;
+    font-size: 1.125rem;
+    line-height: 1.6; /* to match readability */
+    max-width: 80%;
+    margin: 0 auto;
 }
 
 .contact p,
@@ -120,7 +122,7 @@ body {
 /* === Projects === */
 
 .container-wrapper {
-    max-width: 1600px;
+    max-width: 2500px;
     margin: 0 auto;
     padding: 0 300px;
 }
@@ -575,6 +577,37 @@ body {
     margin-bottom: 15px;
 }
 
+/* === CV === */
+
+.cv-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.cv-button {
+  display: inline-flex;      /* makes the button a flex container */
+  align-items: center;       /* vertical centering */
+  text-decoration: none;
+  padding: 15px 32px;
+  background-color: #555555;
+  color: white;
+  border-radius: 12px;
+  font-size: 20px;
+  gap: 10px;                 /* spacing between icon and text */
+}
+
+.cv-button .cv-icon {
+  font-size: 1.2em;          /* slightly larger or smaller to match text */
+  line-height: 1;            /* ensure proper vertical alignment */
+}
+
+.cv-button:hover {
+  background-color: #a4a9ae;
+}
+
+
 .section-divider {
     width: 80%;
     height: 2px;
@@ -738,18 +771,6 @@ body {
         margin-left: 0;
         width: 100%;
         padding: 20px;
-    }
-
-    .container-wrapper {
-        max-width: 2500px;
-        margin: 0 auto;
-        padding: 0 0px;
-    }
-
-    .container-wrapper.archived {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 0 0px;
     }
 
     .project-card.top,
