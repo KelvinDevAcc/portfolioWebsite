@@ -741,7 +741,13 @@ body {
     }
 
     .container-wrapper {
-        max-width: 1600px;
+        max-width: 2500px;
+        margin: 0 auto;
+        padding: 0 0px;
+    }
+
+    .container-wrapper.archived {
+        max-width: 1000px;
         margin: 0 auto;
         padding: 0 0px;
     }
