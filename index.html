@@ -56,7 +56,7 @@
         <section class="projects" id="projects">
             <h2>PROJECTS</h2>
 
-            <div class="container-wrapper">
+            <div class="container-wrapper top-projects-wrapper">
                 <div class="project-grid">
                     <!-- Project: Graduation Work - PPG DDA Experiment -->
                     <div class="project-card top wide" data-title="PPG DDA Experiment"
@@ -283,7 +283,7 @@
 
         <section class="archived-projects" id="archived-projects">
             <h3 class="subsection-title">Archived Projects</h3>
-            <div class="container-wrapper archived">
+            <div class="container-wrapper archived-projects-wrapper">
                 <div class="project-grid archived-projects">
                     <!-- Project: Happy (Cinekid, 2021) -->
                     <div class="project-card archived" data-title="Happy (Cinekid, 2021)"
@@ -434,7 +434,6 @@
                         data-description-did="I developed this multiplayer game with Unity, using C# to create balanced and entertaining party dynamics."
                         data-image="images/portfolio/TheDastardlyBastard/cover.png"
                         data-video="https://www.youtube.com/watch?v=4HGw4nAJQIY"
-                        data-pdf="documents/TheDastardlyBastard_Report.pdf"
                         data-bullets='["Engine: Unity", "Language: C#"]'
                         data-extra-images='["images/portfolio/TheDastardlyBastard/3.png", "images/portfolio/TheDastardlyBastard/5.png"]'>
                         <div class="tag-container"></div>
@@ -479,10 +478,15 @@
     <div class="overlay"></div>
     <div class="modal" id="project-modal">
         <div class="modal-content">
+
             <div class="modal-header">
                 <h1 id="modal-title"></h1>
                 <button class="close-btn">×</button>
             </div>
+
+            <div id="modal-header-tags"></div>
+
+
             <h2>About the Game</h2>
             <p id="modal-description-about"></p>
             <h2>What I Did</h2>
@@ -501,7 +505,6 @@
                 <iframe id="modal-iframe" allowfullscreen></iframe>
             </div>
             <div class="modal-images" id="modal-images"></div>
-            <div class="modal-footer" id="modal-footer"></div>
 
 
             <button class="close-project-btn">Close Project</button>

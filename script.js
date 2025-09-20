@@ -20,7 +20,7 @@ const modalDescriptionAbout = document.getElementById("modal-description-about")
 const modalDescriptionDid = document.getElementById("modal-description-did");
 const modalIframeWrapper = document.getElementById("modal-iframe-wrapper");
 const modalIframe = document.getElementById("modal-iframe");
-const modalFooter = document.getElementById("modal-footer");
+const modalHeaderTags = document.getElementById("modal-header-tags");
 const modalButtons = document.getElementById("modal-buttons");
 const modalExtraImages = document.getElementById("modal-images");
 const modalMainImage = document.getElementById("modal-main-image");
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function clearModal() {
         modalIframeWrapper.style.display = "none";
         modalIframe.src = "";
-        modalFooter.replaceChildren();
+        modalHeaderTags.replaceChildren();
         modalButtons.replaceChildren();
         // Hide and reset the main image
         modalMainImage.src = "";
@@ -90,14 +90,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // Reset other modal elements
         modalIframeWrapper.style.display = "none";
         modalIframe.src = "";
-        modalFooter.replaceChildren();
+        modalHeaderTags.replaceChildren();
         modalButtons.replaceChildren();
 
 
         // Reset other modal elements
         modalIframeWrapper.style.display = "none";
         modalIframe.src = "";
-        modalFooter.replaceChildren();
+        modalHeaderTags.replaceChildren();
         modalButtons.replaceChildren();
         const modalContent = modal.querySelector(".modal-content");
         if (modalContent) modalContent.scrollTop = 0;
@@ -196,41 +196,31 @@ document.addEventListener("DOMContentLoaded", () => {
             if (card.dataset.bullets) {
                 try {
                     const bullets = JSON.parse(card.dataset.bullets);
-                    const headers = [];
-                    const values = [];
-                    bullets.forEach(b => {
-                        const parts = b.split(": ");
-                        if (parts.length === 2) {
-                            headers.push(parts[0]);
-                            values.push(parts[1]);
-                        }
+                    const tagsContainer = document.createElement("div");
+                    tagsContainer.classList.add("modal-tags-container"); // New class for styling
+
+                    bullets.forEach(bullet => {
+                        const parts = bullet.split(': ');
+                        const type = parts[0]?.toLowerCase();
+                        const value = parts[1]?.trim();
+                        if (!type || !value) return;
+
+                        const tag = document.createElement('span');
+                        tag.textContent = value;
+                        tag.classList.add('tag', type, value.toLowerCase().replace(/[^a-z0-9]/g, ''));
+
+                        // Add a class specifically for modal tags to style them differently if needed
+                        tag.classList.add('modal-tag-button');
+
+                        tagsContainer.appendChild(tag);
                     });
-                    if (headers.length) {
-                        const table = document.createElement("table");
-                        table.classList.add("modal-footer-table");
-                        const thead = document.createElement("thead");
-                        const headerRow = document.createElement("tr");
-                        headers.forEach(h => {
-                            const th = document.createElement("th");
-                            th.textContent = h;
-                            headerRow.appendChild(th);
-                        });
-                        thead.appendChild(headerRow);
-                        table.appendChild(thead);
 
-                        const tbody = document.createElement("tbody");
-                        const valueRow = document.createElement("tr");
-                        values.forEach(v => {
-                            const td = document.createElement("td");
-                            td.textContent = v;
-                            valueRow.appendChild(td);
-                        });
-                        tbody.appendChild(valueRow);
-                        table.appendChild(tbody);
+                    // Append the container of buttons to the modal footer
+                    modalHeaderTags.appendChild(tagsContainer);
 
-                        modalFooter.appendChild(table);
-                    }
-                } catch (e) { console.error("Bullet JSON error", e); }
+                } catch (e) {
+                    console.error("Bullet JSON error", e);
+                }
             }
 
             // Buttons

@@ -123,16 +123,20 @@ body {
 /* === Projects === */
 
 .container-wrapper {
+    margin: 0 auto;
+}
+
+/* Styles for the top projects wrapper */
+.top-projects-wrapper {
     max-width: 80%;
-    margin: 0 auto;
-    padding: 0 17%;
+    padding: 0 1rem;
 }
 
-.container-wrapper.archived {
-    max-width: 100%;
-    margin: 0 auto;
+/* Styles for the archived projects wrapper */
+.archived-projects-wrapper {
+    max-width: 100%; /* This will make it full width */
+    padding: 0 10%;
 }
-
 
 .project-card.wide {
     grid-column: span 2;
@@ -180,7 +184,7 @@ body {
 
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     /* exactly 2 columns */
     gap: 25px;
     justify-content: center;
@@ -240,39 +244,44 @@ body {
 
 /* === Projectimages === */
 .modal-images-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-Top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-Top: 2rem;
 }
+
 #modal-main-image {
-  max-width: 80%;
-  max-height: 400px;
-  border-radius: 8px;
+    max-width: 100%;
+    max-height: 400px;
+    border-radius: 8px;
 }
+
 .nav-btn {
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
+
 .modal-thumbnails {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
+
 .modal-thumbnails img {
-  width: 60px;
-  height: 40px;
-  object-fit: cover;
-  cursor: pointer;
-  border: 2px solid transparent;
+    width: 60px;
+    height: 40px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
 }
+
 .modal-thumbnails img.active {
-  border-color: #007bff;
+    border-color: #007bff;
 }
 
 
@@ -297,19 +306,42 @@ body {
 }
 
 /* Base tag style */
-.tag {
-    display: inline-block;
-    padding: 6px 14px;
-    font-size: 0.95rem;
-    /* Bigger text */
-    font-weight: 600;
-    /* Bolder */
+/* Style for the container of the tags in the modal */
+.modal-tags-container {
+    display: flex; /* Makes the container a flexbox */
+    flex-wrap: wrap; /* Allows tags to wrap to the next line if space runs out */
+    justify-content: center; /* Horizontally centers the tags */
+    align-items: center; /* Vertically centers the tags */
+    gap: 8px; /* Adds space between each tag */
+    margin-top: 10px; /* Provides some spacing below the title */
+    margin-bottom: 20px; /* Provides spacing above the description */
+}
+
+/* Base style for the tags inside the modal */
+.modal-tag-button {
+    font-size: 0.9rem;
+    padding: 6px 12px;
     border-radius: 999px;
-    /* Still pill-shaped */
+    font-weight: 600;
+    color: #fff; /* White text for contrast */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
+    cursor: default; /* No hover effect, as they are non-interactive */
+}
+
+.tag {
+    /* Fluid font size, clamped between 0.75rem and 1.2rem */
+    font-size: clamp(0.75rem, 1vw, 1.2rem); 
+    
+    /* Fluid padding, clamped between 6px and 16px */
+    padding: clamp(6px, 1.5vw, 16px) clamp(10px, 2.5vw, 20px); 
+
+    /* Rest of your existing tag styles */
+    display: inline-block;
+    font-weight: 600;
+    border-radius: 999px;
     color: #fff;
     white-space: nowrap;
     background-color: #888;
-    /* Fallback */
     transition: background-color 0.3s ease;
 }
 
@@ -537,35 +569,6 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     margin: auto;
     /* keep it centered horizontally */
-}
-
-.modal-footer-table {
-    width: 100%;
-    border-collapse: collapse;
-    /* Remove double borders */
-    text-align: center;
-    font-family: monospace;
-    font-size: 1rem;
-    color: #222;
-}
-
-.modal-footer-table th,
-.modal-footer-table td {
-    border: none;
-    /* Remove default borders */
-    padding: 0.2rem 0.5rem;
-}
-
-/* Add vertical border between columns except last */
-.modal-footer-table th:not(:last-child),
-.modal-footer-table td:not(:last-child) {
-    border-right: 1px solid #ccc;
-}
-
-/* Add horizontal bottom border below header cells */
-.modal-footer-table th {
-    border-bottom: 1px solid #ccc;
-    font-weight: bold;
 }
 
 .close-project-btn {
@@ -798,6 +801,11 @@ body {
     font-style: italic;
 }
 
+@media (max-width: 1926px) {
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
 
 /* === Responsive Adjustments === */
 @media (max-width: 768px) {
@@ -857,14 +865,6 @@ body {
 
     .intro h1 {
         font-size: 2rem;
-    }
-
-
-    .container-wrapper {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 5%;
-        /* responsive padding */
     }
 
 
