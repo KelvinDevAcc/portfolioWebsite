@@ -299,9 +299,10 @@ body {
 }
 
 .project-card .project-year {
-    font-size: 0.85rem;
-    color: #ccc;
-    margin: 0 0 10px 0;
+    font-size: 1rem; /* Bigger text */
+    font-weight: 700;  /* Thicker text */
+    color: hsl(0, 4%, 10%);
+    margin: 5px 0;
 }
 
 /* Base tag style */
@@ -354,6 +355,10 @@ body {
     /* Calm mint green */
 }
 
+.tag.status {
+    background-color: #b85f7a;
+    /* Calm mint green */
+}
 /* Engine Tags */
 .tag.ownengine {
     background-color: #6c7a89;
@@ -403,7 +408,7 @@ body {
 }
 
 .tag.vr {
-    background-color: #7cd1f9;
+    background-color: #0984bd;
     /* Sky blue */
 }
 
@@ -800,7 +805,7 @@ body {
     font-style: italic;
 }
 
-/* === Extra Large Screens (can enhance layout here if needed) === */
+/* === Extra Large Screens === */
 @media (min-width: 1400px) {
     /* optional: wide screen enhancements */
 }
@@ -808,6 +813,10 @@ body {
 /* === Tablet / Small Desktop (2 → 1 column grid) === */
 @media (max-width: 992px) {
     .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+     .project-grid.archived-projects {
         grid-template-columns: 1fr;
     }
 }
@@ -854,6 +863,9 @@ body {
         min-width: unset;
     }
 
+    .project-grid.archived-projects {
+        grid-template-columns: 1fr;
+    }
     .project-card.wide img,
     .project-card.top img,
     .project-card.archived img {
