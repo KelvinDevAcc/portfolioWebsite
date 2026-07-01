@@ -1,4 +1,8 @@
-/* === Base Styles === */
+/* === Base === */
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-size: 1rem;
@@ -30,17 +34,20 @@ body {
 }
 
 .logo img {
-    width: 120px;
-    height: 120px;
+    position: relative;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
-    /* makes it round */
     object-fit: cover;
-    /* keeps it from stretching */
-
     border: 4px solid #4c4545;
-    /* ✅ white circular border */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    /* optional: soft shadow */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.logo img.active {
+    transform: scale(2.5);
+    z-index: 10;
 }
 
 .nav-links {
@@ -55,13 +62,13 @@ body {
 }
 
 .nav-links a {
+    display: block;
     color: white;
     text-decoration: none;
     font-size: 30px;
     font-weight: bold;
     padding: 10px 15px;
     transition: 0.3s;
-    display: block;
 }
 
 .nav-links a:hover {
@@ -108,7 +115,6 @@ body {
     text-align: center;
     font-size: 1.125rem;
     line-height: 1.6;
-    /* to match readability */
     max-width: 80%;
     margin: 0 auto;
 }
@@ -120,33 +126,18 @@ body {
 }
 
 /* === Projects === */
-
-.container-wrapper {
+.container-wrapper,
+.top-projects-wrapper,
+.archived-projects-wrapper {
     margin: 0 auto;
-}
-
-/* Styles for the top projects wrapper */
-.top-projects-wrapper {
     max-width: 80%;
     padding: 0 1rem;
-}
-
-/* Styles for the archived projects wrapper */
-.archived-projects-wrapper {
-    max-width: 80%; /* This will make it full width */
-        padding: 0 1rem;
 }
 
 .project-card.wide {
     grid-column: span 2;
     grid-row: span 2;
-
     height: 100%;
-}
-
-.project-card.top:hover {
-    z-index: 2;
-    box-shadow: 0 15px 30px rgba(43, 45, 44, 0.5);
 }
 
 .project-card.archived {
@@ -154,14 +145,17 @@ body {
     filter: grayscale(0.3);
 }
 
+.project-card.top:hover,
 .project-card.archived:hover {
     z-index: 2;
-    opacity: 1;
-    filter: grayscale(0);
     box-shadow: 0 15px 30px rgba(43, 45, 44, 0.5);
 }
 
-/* Subsection Headings */
+.project-card.archived:hover {
+    opacity: 1;
+    filter: grayscale(0);
+}
+
 .subsection-title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -184,33 +178,29 @@ body {
 .project-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* exactly 2 columns */
     gap: 25px;
     justify-content: center;
-    /* center the grid items */
 }
 
 .project-grid.archived-projects {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 25px;
     justify-content: stretch;
 }
 
 .project-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* pushes tags to bottom */
+    justify-content: space-between;
     align-items: center;
     background: rgba(255, 255, 255, 0.85);
     padding: 15px;
     border-radius: 12px;
     text-align: center;
-    min-height: 300px; /* adjust as needed */
+    min-height: 300px;
     width: 100%;
     transition: transform 0.2s ease;
     perspective: 1000px;
-    position: relative; /* keep tilt effect working */
+    position: relative;
 }
 
 .project-card img {
@@ -226,23 +216,23 @@ body {
 }
 
 .project-card .tag-container {
+    order: 3;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 6px;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0, 0, 0, 0.4);
     padding: 4px 8px;
     border-radius: 6px;
 }
 
-
-/* === Projectimages === */
+/* === Project Images === */
 .modal-images-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    margin-Top: 2rem;
+    margin-top: 2rem;
 }
 
 #modal-main-image {
@@ -280,10 +270,6 @@ body {
 
 
 
-.project-card:hover .tag-container {
-    opacity: 1;
-}
-
 .tag-container span {
     background: rgba(0, 0, 0, 0.7);
     color: white;
@@ -294,49 +280,32 @@ body {
 }
 
 .project-card h3 {
+    order: 1;
     font-size: 22px;
     margin: 5px 0;
 }
 
 .project-card .project-year {
-    font-size: 1rem; /* Bigger text */
-    font-weight: 700;  /* Thicker text */
+    order: 2;
+    font-size: 1rem;
+    font-weight: 700;
     color: hsl(0, 4%, 10%);
     margin: 5px 0;
 }
 
-/* Base tag style */
-/* Style for the container of the tags in the modal */
 .modal-tags-container {
-    display: flex; /* Makes the container a flexbox */
-    flex-wrap: wrap; /* Allows tags to wrap to the next line if space runs out */
-    justify-content: center; /* Horizontally centers the tags */
-    align-items: center; /* Vertically centers the tags */
-    gap: 8px; /* Adds space between each tag */
-    margin-top: 10px; /* Provides some spacing below the title */
-    margin-bottom: 20px; /* Provides spacing above the description */
-}
-
-/* Base style for the tags inside the modal */
-.modal-tag-button {
-    font-size: 0.9rem;
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-weight: 600;
-    color: #fff; /* White text for contrast */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Subtle text shadow */
-    cursor: default; /* No hover effect, as they are non-interactive */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 20px;
 }
 
 .tag {
-    /* Fluid font size, clamped between 0.75rem and 1.2rem */
-    font-size: clamp(0.75rem, 1vw, 1.2rem); 
-    
-    /* Fluid padding, clamped between 6px and 16px */
-    padding: clamp(6px, 1.5vw, 16px) clamp(10px, 2.5vw, 20px); 
-
-    /* Rest of your existing tag styles */
     display: inline-block;
+    padding: clamp(6px, 1.5vw, 16px) clamp(10px, 2.5vw, 20px);
+    font-size: clamp(0.75rem, 1vw, 1.2rem);
     font-weight: 600;
     border-radius: 999px;
     color: #fff;
@@ -347,95 +316,74 @@ body {
 
 .tag.language {
     background-color: #a07cc5;
-    /* Soft lavender-purple */
 }
 
 .tag.genre {
     background-color: #5fb87a;
-    /* Calm mint green */
 }
 
 .tag.status {
     background-color: #b85f7a;
-    /* Calm mint green */
 }
-/* Engine Tags */
+
 .tag.ownengine {
     background-color: #6c7a89;
-    /* Soft slate gray */
 }
 
 .tag.unity {
     background-color: #5475b6;
-    /* Soft Nordic gray-blue */
 }
 
 .tag.unreal {
     background-color: #2d3a5a;
-    /* Deep desaturated navy */
 }
 
-/* Language Tags */
 .tag.csharp {
     background-color: #240950;
-    /* Muted violet */
 }
 
 .tag.cpp {
     background-color: #5783db;
-    /* Light desaturated blue */
 }
 
 .tag.html {
     background-color: #e77f57;
-    /* Soft orange */
 }
 
-/* Genre Tags */
 .tag.shooter {
     background-color: #d97171;
-    /* Muted red */
 }
 
 .tag.platformer {
     background-color: #6cd3b3;
-    /* Light teal */
 }
 
 .tag.gamejam {
     background-color: #ff99b3;
-    /* Soft pink */
 }
 
 .tag.vr {
     background-color: #0984bd;
-    /* Sky blue */
 }
 
 .tag.fitness {
     background-color: #97cc62;
-    /* Soft lime green */
 }
 
 .tag.company-assignment {
     background-color: #e49e61;
-    /* Warm tan */
 }
 
-/* Multiplayer/Device Tags */
 .tag.multiplayer-online {
     background-color: #58a6ff;
-    /* Bright but soft blue */
 }
 
 .tag.multiplayer-coop {
     background-color: #8bd3c7;
-    /* Aqua green */
 }
 
 .tag.hololens {
     background-color: #ad91e6;
-    /* Soft techy purple */
 }
 
 
@@ -446,11 +394,38 @@ body {
     }
 }
 
-/* Modal (Overlay) */
+.media-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#modal-description-did {
+    margin-bottom: 2.25rem;
+}
+
+#media-gallery-title {
+    margin-top:1rem;
+    margin-bottom: 2.25rem;
+}
+
+.showcase-item video,
+.showcase-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.showcase-item p {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+/* === Modal === */
 .modal {
     display: none;
     position: fixed;
-    /* keep centered */
     top: 0;
     left: 0;
     width: 100vw;
@@ -458,27 +433,21 @@ body {
     backdrop-filter: blur(10px);
     justify-content: center;
     align-items: flex-start;
-    /* modal starts at top */
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     overflow-y: auto;
-    /* ✅ allow scroll when content is tall */
     padding: 2rem 0;
-    /* some breathing space top/bottom */
 }
 
-.modal,
 .overlay {
     display: none;
     position: fixed;
-    /* cover entire viewport */
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
     background: rgba(59, 59, 59, 0.347);
-    /* dark backdrop */
     z-index: 999;
 }
 
@@ -545,13 +514,10 @@ body {
     position: relative;
     width: 90%;
     max-width: 700px;
-    margin: 2rem auto;
-    /* center horizontally */
+    margin: 2rem auto 2.25rem;
     padding-bottom: 56.25%;
-    /* 16:9 ratio */
     height: 0;
     display: none;
-    /* initially hidden, shown via JS */
 }
 
 #modal-iframe {
@@ -564,6 +530,15 @@ body {
     border-radius: 10px;
 }
 
+.modal-video {
+    width: 90%;
+    max-width: 700px;
+    max-height: 70vh;
+    margin: 2rem auto 2.25rem;
+    border-radius: 10px;
+    display: block;
+}
+
 .modal-content {
     max-width: 850px;
     background: rgb(172, 108, 108);
@@ -572,7 +547,6 @@ body {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     margin: auto;
-    /* keep it centered horizontally */
 }
 
 .close-project-btn {
@@ -586,15 +560,31 @@ body {
 .modal .btn {
     background: #272525;
     color: rgb(216, 203, 203);
-    padding: 0.5rem 1rem;
+    padding: 1rem 2rem;
     text-decoration: none;
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    margin: 0 0.5rem 0.5rem 0;
-    /* add spacing */
+    margin: 0 2rem 0.5rem 0;
     font-weight: 600;
     transition: background-color 0.3s ease;
+}
+
+.modal .btn:active {
+    background: #111;
+    transform: scale(0.97);
+}
+
+.modal .btn:focus,
+.modal .btn:focus-visible {
+    background: #272525;
+    color: rgb(216, 203, 203);
+    outline: none;
+}
+
+.modal .btn:focus-visible {
+    outline: 2px solid #888;
+    outline-offset: 3px;
 }
 
 .btn:hover {
@@ -616,6 +606,7 @@ body {
 }
 
 .profile-pic {
+    position: relative;
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -626,10 +617,9 @@ body {
     cursor: pointer;
 }
 
-/* On click, add a class to scale it */
 .profile-pic.active {
     transform: scale(5.5);
-    /* increase size 1.5x */
+    z-index: 10;
 }
 
 .about p {
@@ -650,9 +640,7 @@ body {
 
 .cv-button {
     display: inline-flex;
-    /* makes the button a flex container */
     align-items: center;
-    /* vertical centering */
     text-decoration: none;
     padding: 15px 32px;
     background-color: #555555;
@@ -660,14 +648,6 @@ body {
     border-radius: 12px;
     font-size: 20px;
     gap: 10px;
-    /* spacing between icon and text */
-}
-
-.cv-button .cv-icon {
-    font-size: 1.2em;
-    /* slightly larger or smaller to match text */
-    line-height: 1;
-    /* ensure proper vertical alignment */
 }
 
 .cv-button:hover {
@@ -702,11 +682,6 @@ body {
     margin-bottom: 15px;
 }
 
-.contact-icon {
-    width: 30px;
-    height: auto;
-}
-
 .email-text {
     font-size: 18px;
     font-weight: bold;
@@ -734,7 +709,7 @@ body {
 }
 
 
-/* skills */
+/* === Skills === */
 .skills h1 {
     font-size: 2rem;
     font-weight: bold;
@@ -765,7 +740,6 @@ body {
     flex-direction: column;
     height: 100%;
 }
-
 
 .box h2 {
     font-size: 1.25rem;
@@ -805,18 +779,13 @@ body {
     font-style: italic;
 }
 
-/* === Extra Large Screens === */
-@media (min-width: 1400px) {
-    /* optional: wide screen enhancements */
-}
-
 /* === Tablet / Small Desktop (2 → 1 column grid) === */
 @media (max-width: 992px) {
     .project-grid {
         grid-template-columns: 1fr;
     }
 
-     .project-grid.archived-projects {
+    .project-grid.archived-projects {
         grid-template-columns: 1fr;
     }
 }
@@ -866,6 +835,7 @@ body {
     .project-grid.archived-projects {
         grid-template-columns: 1fr;
     }
+
     .project-card.wide img,
     .project-card.top img,
     .project-card.archived img {
