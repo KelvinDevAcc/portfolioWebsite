@@ -322,11 +322,19 @@ body {
     background-color: #5fb87a;
 }
 
+.tag.modes {
+    background-color: #017c3b;
+}
+
 .tag.status {
     background-color: #b85f7a;
 }
 
 .tag.ownengine {
+    background-color: #6c7a89;
+}
+
+.tag.premadeengine {
     background-color: #6c7a89;
 }
 
